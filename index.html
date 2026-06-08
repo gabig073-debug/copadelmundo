@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
     box-sizing:border-box;
 }
 
-html, body{
+html,body{
     width:100%;
     height:100%;
     overflow:hidden;
@@ -22,64 +23,177 @@ html, body{
 }
 
 body{
-    background:url('fondo.jpg');
+    background:url("estadio.jpg") center center no-repeat;
     background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
 }
 
-/* CONTENEDOR DEL CONTADOR */
+/* COPA */
 
-#contador{
+#copa{
+
     position:absolute;
 
-    /* AJUSTAR ESTOS VALORES SI HACE FALTA */
-    top:49%;
-    left:67%;
+    left:20px;
+    bottom:20px;
+
+    height:850px;
+
+    z-index:2;
+
+    filter:
+        drop-shadow(0 0 20px rgba(255,215,0,.8))
+        drop-shadow(0 0 40px rgba(255,215,0,.6));
+}
+
+/* TITULO */
+
+.titulo{
+
+    position:absolute;
+
+    top:40px;
+    left:62%;
+
+    transform:translateX(-50%);
+
+    text-align:center;
+
+    color:white;
+
+    z-index:10;
+
+    text-shadow:
+    0 0 10px #000,
+    0 0 20px #000;
+}
+
+.linea1{
+
+    font-size:40px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.linea2{
+
+    font-size:120px;
+
+    font-weight:900;
+}
+
+.linea2 span{
+
+    color:#FFD700;
+}
+
+/* CONTADOR */
+
+#contador{
+
+    position:absolute;
+
+    top:55%;
+    left:65%;
 
     transform:translate(-50%,-50%);
 
     display:flex;
-    gap:45px;
+
+    gap:35px;
+
+    padding:25px 35px;
+
+    background:rgba(0,0,0,.45);
+
+    border:3px solid #FFD700;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 20px rgba(255,215,0,.8),
+    inset 0 0 20px rgba(255,215,0,.3);
+
+    z-index:10;
+}
+
+.bloque{
+
+    width:150px;
 
     text-align:center;
 }
 
-.bloque{
-    width:140px;
-}
-
 .numero{
 
-    color:#FFFFFF;
+    color:white;
 
     font-size:95px;
+
     font-weight:900;
 
-    text-shadow:
-        0px 0px 8px rgba(0,0,0,.8),
-        0px 0px 20px rgba(0,0,0,.8);
-
     line-height:1;
+
+    text-shadow:
+    0 0 10px #000,
+    0 0 20px #000;
 }
 
 .etiqueta{
 
-    margin-top:8px;
-
     color:#FFD700;
 
-    font-size:24px;
+    font-size:26px;
+
+    font-weight:bold;
+
+    margin-top:5px;
+}
+
+/* FRASE */
+
+.frase{
+
+    position:absolute;
+
+    bottom:40px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:42px;
+
     font-weight:bold;
 
     text-shadow:
-        0px 0px 8px rgba(0,0,0,.8);
+    0 0 10px #000,
+    0 0 20px #000;
+
+    z-index:10;
 }
 
 </style>
 </head>
 
 <body>
+
+<img src="copa.png" id="copa">
+
+<div class="titulo">
+
+    <div class="linea1">
+        FALTAN PARA EL
+    </div>
+
+    <div class="linea2">
+        MUNDIAL <span>2026</span>
+    </div>
+
+</div>
 
 <div id="contador">
 
@@ -105,25 +219,19 @@ body{
 
 </div>
 
+<div class="frase">
+    LA ILUSIÓN DE TODO UN PAÍS
+</div>
+
 <script>
 
-const fechaMundial = new Date("2026-06-11T00:00:00");
+const fechaObjetivo = new Date("2026-06-11T00:00:00");
 
-function actualizarContador(){
+function actualizar(){
 
     const ahora = new Date();
 
-    const diferencia = fechaMundial - ahora;
-
-    if(diferencia <= 0){
-
-        document.getElementById("dias").textContent = "000";
-        document.getElementById("horas").textContent = "00";
-        document.getElementById("minutos").textContent = "00";
-        document.getElementById("segundos").textContent = "00";
-
-        return;
-    }
+    const diferencia = fechaObjetivo - ahora;
 
     const dias = Math.floor(
         diferencia / (1000 * 60 * 60 * 24)
@@ -145,19 +253,13 @@ function actualizarContador(){
     );
 
     document.getElementById("dias").textContent = dias;
-    document.getElementById("horas").textContent =
-        String(horas).padStart(2,"0");
-
-    document.getElementById("minutos").textContent =
-        String(minutos).padStart(2,"0");
-
-    document.getElementById("segundos").textContent =
-        String(segundos).padStart(2,"0");
+    document.getElementById("horas").textContent = String(horas).padStart(2,"0");
+    document.getElementById("minutos").textContent = String(minutos).padStart(2,"0");
+    document.getElementById("segundos").textContent = String(segundos).padStart(2,"0");
 }
 
-actualizarContador();
-
-setInterval(actualizarContador,1000);
+actualizar();
+setInterval(actualizar,1000);
 
 </script>
 
