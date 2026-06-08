@@ -7,6 +7,8 @@
 
 <title>Mundial 2026</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
 <style>
 
 *{
@@ -22,7 +24,7 @@ body{
     justify-content:center;
     align-items:center;
     background:transparent;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Bebas Neue', sans-serif;
 }
 
 .contenedor{
@@ -46,15 +48,13 @@ body{
     box-shadow:
     0 0 20px rgba(255,215,0,.8),
     0 0 40px rgba(255,215,0,.5);
-
 }
 
 .copa{
 
-    width:220px;
+    width:260px;
 
     animation:flotar 3s ease-in-out infinite;
-
 }
 
 @keyframes flotar{
@@ -70,50 +70,76 @@ body{
     100%{
         transform:translateY(0px);
     }
-
 }
 
 .info{
     text-align:center;
 }
 
-.titulo{
-
-    color:white;
-    font-size:50px;
-    font-weight:bold;
-
-    text-shadow:
-    0 0 10px #000,
-    0 0 20px #000;
-
-    margin-bottom:15px;
-
-}
+/* FALTAN PARA EL */
 
 .subtitulo{
 
-    color:#FFD700;
-    font-size:24px;
-    font-weight:bold;
+    color:white;
+
+    font-size:38px;
+
+    letter-spacing:3px;
+
+    margin-bottom:5px;
+
+    text-shadow:
+    0 0 10px rgba(0,0,0,.8);
+}
+
+/* MUNDIAL 2026 */
+
+.titulo{
+
+    color:white;
+
+    font-size:95px;
+
+    line-height:0.9;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+    0 3px 0 rgba(0,0,0,.8),
+    0 0 20px rgba(0,0,0,.8);
 
     margin-bottom:20px;
-
 }
+
+.titulo span{
+
+    color:#FFD700;
+
+    text-shadow:
+    0 0 10px rgba(255,215,0,.5),
+    0 0 20px rgba(255,215,0,.3);
+}
+
+/* CONTADOR */
 
 #contador{
 
     color:white;
-    font-size:60px;
-    font-weight:bold;
+
+    font-size:70px;
+
+    line-height:1.1;
 
     text-shadow:
-    0 0 10px #000,
-    0 0 20px #000;
+    0 0 10px rgba(0,0,0,.8),
+    0 0 20px rgba(0,0,0,.8);
 
-    line-height:1.3;
-
+    margin-top:10px;
 }
+
+/* ARGENTINA */
 
 .footer{
 
@@ -121,10 +147,12 @@ body{
 
     color:white;
 
-    font-size:22px;
+    font-size:32px;
 
-    font-weight:bold;
+    letter-spacing:2px;
 
+    text-shadow:
+    0 0 10px rgba(0,0,0,.8);
 }
 
 </style>
@@ -138,12 +166,12 @@ body{
 
     <div class="info">
 
-        <div class="titulo">
-            ⚽ MUNDIAL 2026
+        <div class="subtitulo">
+            ★ FALTAN PARA EL ★
         </div>
 
-        <div class="subtitulo">
-            CUENTA REGRESIVA
+        <div class="titulo">
+            MUNDIAL <span>2026</span>
         </div>
 
         <div id="contador">
@@ -200,7 +228,9 @@ function actualizarContador(){
     document.getElementById("contador").innerHTML =
     `
     ${dias} días<br>
-    ${horas}h ${minutos}m ${segundos}s
+    ${String(horas).padStart(2,'0')}h
+    ${String(minutos).padStart(2,'0')}m
+    ${String(segundos).padStart(2,'0')}s
     `;
 }
 
