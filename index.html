@@ -15,165 +15,116 @@
     box-sizing:border-box;
 }
 
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
+body{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:transparent;
     font-family:Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:url("estadio.jpg") center center no-repeat;
-    background-size:cover;
-}
-
-/* COPA */
-
-#copa{
-
-    position:absolute;
-
-    left:20px;
-    bottom:20px;
-
-    height:850px;
-
-    z-index:2;
-
-    filter:
-        drop-shadow(0 0 20px rgba(255,215,0,.8))
-        drop-shadow(0 0 40px rgba(255,215,0,.6));
-}
-
-/* TITULO */
-
-.titulo{
-
-    position:absolute;
-
-    top:40px;
-    left:62%;
-
-    transform:translateX(-50%);
-
-    text-align:center;
-
-    color:white;
-
-    z-index:10;
-
-    text-shadow:
-    0 0 10px #000,
-    0 0 20px #000;
-}
-
-.linea1{
-
-    font-size:40px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-}
-
-.linea2{
-
-    font-size:120px;
-
-    font-weight:900;
-}
-
-.linea2 span{
-
-    color:#FFD700;
-}
-
-/* CONTADOR */
-
-#contador{
-
-    position:absolute;
-
-    top:55%;
-    left:65%;
-
-    transform:translate(-50%,-50%);
+.contenedor{
 
     display:flex;
+    align-items:center;
+    gap:40px;
 
-    gap:35px;
+    padding:30px 40px;
 
-    padding:25px 35px;
+    background:linear-gradient(
+        135deg,
+        rgba(0,40,85,.95),
+        rgba(0,90,180,.95)
+    );
 
-    background:rgba(0,0,0,.45);
+    border:4px solid #FFD700;
 
-    border:3px solid #FFD700;
-
-    border-radius:20px;
+    border-radius:25px;
 
     box-shadow:
     0 0 20px rgba(255,215,0,.8),
-    inset 0 0 20px rgba(255,215,0,.3);
+    0 0 40px rgba(255,215,0,.5);
 
-    z-index:10;
 }
 
-.bloque{
+.copa{
 
-    width:150px;
+    width:220px;
 
+    animation:flotar 3s ease-in-out infinite;
+
+}
+
+@keyframes flotar{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+.info{
     text-align:center;
 }
 
-.numero{
+.titulo{
 
     color:white;
-
-    font-size:95px;
-
-    font-weight:900;
-
-    line-height:1;
+    font-size:50px;
+    font-weight:bold;
 
     text-shadow:
     0 0 10px #000,
     0 0 20px #000;
+
+    margin-bottom:15px;
+
 }
 
-.etiqueta{
+.subtitulo{
 
     color:#FFD700;
-
-    font-size:26px;
-
+    font-size:24px;
     font-weight:bold;
 
-    margin-top:5px;
+    margin-bottom:20px;
+
 }
 
-/* FRASE */
-
-.frase{
-
-    position:absolute;
-
-    bottom:40px;
-
-    width:100%;
-
-    text-align:center;
+#contador{
 
     color:white;
-
-    font-size:42px;
-
+    font-size:60px;
     font-weight:bold;
 
     text-shadow:
     0 0 10px #000,
     0 0 20px #000;
 
-    z-index:10;
+    line-height:1.3;
+
+}
+
+.footer{
+
+    margin-top:20px;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
 }
 
 </style>
@@ -181,85 +132,81 @@ body{
 
 <body>
 
-<img src="copa.png" id="copa">
+<div class="contenedor">
 
-<div class="titulo">
+    <img src="copa.png" class="copa">
 
-    <div class="linea1">
-        FALTAN PARA EL
+    <div class="info">
+
+        <div class="titulo">
+            ⚽ MUNDIAL 2026
+        </div>
+
+        <div class="subtitulo">
+            CUENTA REGRESIVA
+        </div>
+
+        <div id="contador">
+            Cargando...
+        </div>
+
+        <div class="footer">
+            🇦🇷 ARGENTINA 🇦🇷
+        </div>
+
     </div>
 
-    <div class="linea2">
-        MUNDIAL <span>2026</span>
-    </div>
-
-</div>
-
-<div id="contador">
-
-    <div class="bloque">
-        <div class="numero" id="dias">000</div>
-        <div class="etiqueta">DÍAS</div>
-    </div>
-
-    <div class="bloque">
-        <div class="numero" id="horas">00</div>
-        <div class="etiqueta">HORAS</div>
-    </div>
-
-    <div class="bloque">
-        <div class="numero" id="minutos">00</div>
-        <div class="etiqueta">MINUTOS</div>
-    </div>
-
-    <div class="bloque">
-        <div class="numero" id="segundos">00</div>
-        <div class="etiqueta">SEGUNDOS</div>
-    </div>
-
-</div>
-
-<div class="frase">
-    LA ILUSIÓN DE TODO UN PAÍS
 </div>
 
 <script>
 
-const fechaObjetivo = new Date("2026-06-11T00:00:00");
+const fechaMundial = new Date("2026-06-11T00:00:00");
 
-function actualizar(){
+function actualizarContador(){
 
     const ahora = new Date();
 
-    const diferencia = fechaObjetivo - ahora;
+    const diferencia = fechaMundial - ahora;
 
-    const dias = Math.floor(
-        diferencia / (1000 * 60 * 60 * 24)
-    );
+    if(diferencia <= 0){
 
-    const horas = Math.floor(
+        document.getElementById("contador").innerHTML =
+        "⚽ ¡COMENZÓ EL MUNDIAL!";
+
+        return;
+    }
+
+    const dias =
+    Math.floor(diferencia / (1000 * 60 * 60 * 24));
+
+    const horas =
+    Math.floor(
         (diferencia % (1000 * 60 * 60 * 24))
         / (1000 * 60 * 60)
     );
 
-    const minutos = Math.floor(
+    const minutos =
+    Math.floor(
         (diferencia % (1000 * 60 * 60))
         / (1000 * 60)
     );
 
-    const segundos = Math.floor(
+    const segundos =
+    Math.floor(
         (diferencia % (1000 * 60))
         / 1000
     );
 
-    document.getElementById("dias").textContent = dias;
-    document.getElementById("horas").textContent = String(horas).padStart(2,"0");
-    document.getElementById("minutos").textContent = String(minutos).padStart(2,"0");
-    document.getElementById("segundos").textContent = String(segundos).padStart(2,"0");
+    document.getElementById("contador").innerHTML =
+    `
+    ${dias} días<br>
+    ${horas}h ${minutos}m ${segundos}s
+    `;
 }
 
-actualizar();
-setInterval(actualizar,1000);
+actualizarContador();
+
+setInterval(actualizarContador, 1000);
 
 </script>
 
