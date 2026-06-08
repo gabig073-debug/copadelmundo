@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cuenta Regresiva Mundial 2026</title>
+<title>Mundial 2026</title>
 
 <style>
 
@@ -25,67 +26,105 @@ body{
 }
 
 .contenedor{
-    text-align:center;
-    padding:30px;
-    border-radius:25px;
+
+    display:flex;
+    align-items:center;
+    gap:40px;
+
+    padding:30px 40px;
 
     background:linear-gradient(
         135deg,
-        rgba(108,190,255,0.95),
-        rgba(0,45,98,0.95)
+        rgba(0,40,85,.95),
+        rgba(0,90,180,.95)
     );
 
-    border:4px solid gold;
+    border:4px solid #FFD700;
+
+    border-radius:25px;
 
     box-shadow:
     0 0 20px rgba(255,215,0,.8),
-    0 0 40px rgba(255,215,0,.6);
+    0 0 40px rgba(255,215,0,.5);
+
 }
 
 .copa{
-    width:180px;
-    margin-bottom:15px;
+
+    width:220px;
+
     animation:flotar 3s ease-in-out infinite;
+
 }
 
 @keyframes flotar{
+
     0%{
-        transform:translateY(0);
+        transform:translateY(0px);
     }
+
     50%{
         transform:translateY(-10px);
     }
+
     100%{
-        transform:translateY(0);
+        transform:translateY(0px);
     }
+
+}
+
+.info{
+    text-align:center;
 }
 
 .titulo{
-    font-size:42px;
+
     color:white;
-    text-shadow:3px 3px 8px black;
+    font-size:50px;
+    font-weight:bold;
+
+    text-shadow:
+    0 0 10px #000,
+    0 0 20px #000;
+
     margin-bottom:15px;
+
 }
 
 .subtitulo{
-    font-size:20px;
-    color:white;
+
+    color:#FFD700;
+    font-size:24px;
+    font-weight:bold;
+
     margin-bottom:20px;
+
 }
 
 #contador{
+
     color:white;
-    font-size:58px;
+    font-size:60px;
     font-weight:bold;
+
+    text-shadow:
+    0 0 10px #000,
+    0 0 20px #000;
+
     line-height:1.3;
-    text-shadow:3px 3px 8px black;
+
 }
 
 .footer{
+
     margin-top:20px;
-    color:#fff;
-    font-size:18px;
-    letter-spacing:2px;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
 }
 
 </style>
@@ -95,22 +134,26 @@ body{
 
 <div class="contenedor">
 
-    <img src="copa.png" alt="Copa Mundial" class="copa">
+    <img src="copa.png" class="copa">
 
-    <div class="titulo">
-        ⚽ MUNDIAL 2026 ⚽
-    </div>
+    <div class="info">
 
-    <div class="subtitulo">
-        Faltan:
-    </div>
+        <div class="titulo">
+            ⚽ MUNDIAL 2026
+        </div>
 
-    <div id="contador">
-        Cargando...
-    </div>
+        <div class="subtitulo">
+            CUENTA REGRESIVA
+        </div>
 
-    <div class="footer">
-        🇦🇷 ARGENTINA 🇦🇷
+        <div id="contador">
+            Cargando...
+        </div>
+
+        <div class="footer">
+            🇦🇷 ARGENTINA 🇦🇷
+        </div>
+
     </div>
 
 </div>
@@ -122,29 +165,34 @@ const fechaMundial = new Date("2026-06-11T00:00:00");
 function actualizarContador(){
 
     const ahora = new Date();
+
     const diferencia = fechaMundial - ahora;
 
     if(diferencia <= 0){
+
         document.getElementById("contador").innerHTML =
         "⚽ ¡COMENZÓ EL MUNDIAL!";
+
         return;
     }
 
-    const dias = Math.floor(
-        diferencia / (1000 * 60 * 60 * 24)
-    );
+    const dias =
+    Math.floor(diferencia / (1000 * 60 * 60 * 24));
 
-    const horas = Math.floor(
+    const horas =
+    Math.floor(
         (diferencia % (1000 * 60 * 60 * 24))
         / (1000 * 60 * 60)
     );
 
-    const minutos = Math.floor(
+    const minutos =
+    Math.floor(
         (diferencia % (1000 * 60 * 60))
         / (1000 * 60)
     );
 
-    const segundos = Math.floor(
+    const segundos =
+    Math.floor(
         (diferencia % (1000 * 60))
         / 1000
     );
@@ -157,6 +205,7 @@ function actualizarContador(){
 }
 
 actualizarContador();
+
 setInterval(actualizarContador, 1000);
 
 </script>
