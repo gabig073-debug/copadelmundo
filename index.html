@@ -37,8 +37,8 @@ body{
 
     background:linear-gradient(
         135deg,
-        rgba(0,40,85,.95),
-        rgba(0,90,180,.95)
+        rgba(0,25,60,.95),
+        rgba(0,70,150,.95)
     );
 
     border:4px solid #FFD700;
@@ -46,15 +46,19 @@ body{
     border-radius:25px;
 
     box-shadow:
-    0 0 20px rgba(255,215,0,.8),
-    0 0 40px rgba(255,215,0,.5);
+        0 0 20px rgba(255,215,0,.8),
+        0 0 40px rgba(255,215,0,.5);
+
 }
+
+/* COPA */
 
 .copa{
 
     width:260px;
 
     animation:flotar 3s ease-in-out infinite;
+
 }
 
 @keyframes flotar{
@@ -70,6 +74,7 @@ body{
     100%{
         transform:translateY(0px);
     }
+
 }
 
 .info{
@@ -82,14 +87,15 @@ body{
 
     color:white;
 
-    font-size:38px;
+    font-size:42px;
 
     letter-spacing:3px;
 
     margin-bottom:5px;
 
     text-shadow:
-    0 0 10px rgba(0,0,0,.8);
+        0 0 10px rgba(0,0,0,.8);
+
 }
 
 /* MUNDIAL 2026 */
@@ -98,19 +104,18 @@ body{
 
     color:white;
 
-    font-size:95px;
+    font-size:100px;
 
     line-height:0.9;
 
     letter-spacing:1px;
 
-    text-transform:uppercase;
+    margin-bottom:25px;
 
     text-shadow:
-    0 3px 0 rgba(0,0,0,.8),
-    0 0 20px rgba(0,0,0,.8);
+        0 0 10px rgba(0,0,0,.8),
+        0 0 20px rgba(0,0,0,.8);
 
-    margin-bottom:20px;
 }
 
 .titulo span{
@@ -118,25 +123,77 @@ body{
     color:#FFD700;
 
     text-shadow:
-    0 0 10px rgba(255,215,0,.5),
-    0 0 20px rgba(255,215,0,.3);
+        0 0 10px rgba(255,215,0,.5),
+        0 0 20px rgba(255,215,0,.3);
+
 }
 
 /* CONTADOR */
 
 #contador{
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:25px;
+
+    padding:25px 35px;
+
+    background:rgba(0,0,20,.90);
+
+    border:3px solid #FFD700;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 0 20px rgba(255,215,0,.8),
+        inset 0 0 20px rgba(255,215,0,.2);
+
+}
+
+.bloque{
+
+    text-align:center;
+
+    min-width:130px;
+
+}
+
+.numero{
+
     color:white;
 
-    font-size:70px;
+    font-size:95px;
 
-    line-height:1.1;
+    line-height:1;
 
     text-shadow:
-    0 0 10px rgba(0,0,0,.8),
-    0 0 20px rgba(0,0,0,.8);
+        0 0 10px rgba(0,0,0,.9),
+        0 0 20px rgba(0,0,0,.9);
 
-    margin-top:10px;
+}
+
+.texto{
+
+    color:#FFD700;
+
+    font-size:30px;
+
+    letter-spacing:1px;
+
+}
+
+.separador{
+
+    width:2px;
+
+    height:120px;
+
+    background:rgba(255,255,255,.4);
+
 }
 
 /* ARGENTINA */
@@ -147,12 +204,13 @@ body{
 
     color:white;
 
-    font-size:32px;
+    font-size:34px;
 
     letter-spacing:2px;
 
     text-shadow:
-    0 0 10px rgba(0,0,0,.8);
+        0 0 10px rgba(0,0,0,.8);
+
 }
 
 </style>
@@ -175,7 +233,33 @@ body{
         </div>
 
         <div id="contador">
-            Cargando...
+
+            <div class="bloque">
+                <div class="numero" id="dias">000</div>
+                <div class="texto">DÍAS</div>
+            </div>
+
+            <div class="separador"></div>
+
+            <div class="bloque">
+                <div class="numero" id="horas">00</div>
+                <div class="texto">HORAS</div>
+            </div>
+
+            <div class="separador"></div>
+
+            <div class="bloque">
+                <div class="numero" id="minutos">00</div>
+                <div class="texto">MINUTOS</div>
+            </div>
+
+            <div class="separador"></div>
+
+            <div class="bloque">
+                <div class="numero" id="segundos">00</div>
+                <div class="texto">SEGUNDOS</div>
+            </div>
+
         </div>
 
         <div class="footer">
@@ -198,45 +282,42 @@ function actualizarContador(){
 
     if(diferencia <= 0){
 
-        document.getElementById("contador").innerHTML =
-        "⚽ ¡COMENZÓ EL MUNDIAL!";
+        document.getElementById("dias").textContent = "000";
+        document.getElementById("horas").textContent = "00";
+        document.getElementById("minutos").textContent = "00";
+        document.getElementById("segundos").textContent = "00";
 
         return;
     }
 
-    const dias =
-    Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const dias = Math.floor(
+        diferencia / (1000 * 60 * 60 * 24)
+    );
 
-    const horas =
-    Math.floor(
+    const horas = Math.floor(
         (diferencia % (1000 * 60 * 60 * 24))
         / (1000 * 60 * 60)
     );
 
-    const minutos =
-    Math.floor(
+    const minutos = Math.floor(
         (diferencia % (1000 * 60 * 60))
         / (1000 * 60)
     );
 
-    const segundos =
-    Math.floor(
+    const segundos = Math.floor(
         (diferencia % (1000 * 60))
         / 1000
     );
 
-    document.getElementById("contador").innerHTML =
-    `
-    ${dias} días<br>
-    ${String(horas).padStart(2,'0')}h
-    ${String(minutos).padStart(2,'0')}m
-    ${String(segundos).padStart(2,'0')}s
-    `;
+    document.getElementById("dias").textContent = dias;
+    document.getElementById("horas").textContent = String(horas).padStart(2,"0");
+    document.getElementById("minutos").textContent = String(minutos).padStart(2,"0");
+    document.getElementById("segundos").textContent = String(segundos).padStart(2,"0");
 }
 
 actualizarContador();
 
-setInterval(actualizarContador, 1000);
+setInterval(actualizarContador,1000);
 
 </script>
 
